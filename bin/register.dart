@@ -18,6 +18,10 @@ void register() {
 
     users.add(User(newName, newPassword, newbudget));
 
-    print("Registration succesful. You can login now");
+    print("""
+✅ Registration Successful!
+🎉 Your account has been created.
+You can now return to the main menu and choose option 1️⃣  to login.
+""");
   }
 }
