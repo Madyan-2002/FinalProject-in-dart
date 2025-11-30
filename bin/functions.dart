@@ -64,7 +64,7 @@ Please enter 1, 2, or 3.
         }
       case 3:
         {
-          print("Goodbye!");
+          print("Goodbye! 👋");
           exit(0);
         }
     }
@@ -169,6 +169,7 @@ Thank you for your purchase!
             displayMenu2();
             shopping = false;
           } else {
+            print("Goodbye! 👋");
             exit(0);
           }
         }
