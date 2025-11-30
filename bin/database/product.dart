@@ -1,4 +1,5 @@
 import 'dart:io';
+import '../functions.dart';
 
 class Product {
   String brand;
@@ -46,5 +47,21 @@ void repairDevice() {
     print(service);
   }
   print("====================================");
-  exit(0);
+
+  bool shop = true;
+  while(shop) {
+  stdout.write(
+            "Do you want to continue shopping or repair another item? (y = Yes, return to menu / n = No, exit program): (y/n): ",
+          );
+          String? again = stdin.readLineSync()?.toLowerCase();
+          print("");
+          if (again == 'y') {
+            displayMenu2();
+            shop = false;
+          } else {
+            print("Goodbye! 👋");
+            exit(0);
+          }
+  }
+
 }
