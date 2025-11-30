@@ -34,32 +34,40 @@ void displayMenu2() {
 }
 
 void check() {
-  stdout.write("Please enter your choise :");
-  int choice = int.parse(stdin.readLineSync()!);
-  if (choice != 1 && choice != 2 && choice != 3) {
-    print("""
+  while (true) {
+    stdout.write("Please enter your choise :");
+    int choice = int.parse(stdin.readLineSync()!);
+    if (choice != 1 && choice != 2 && choice != 3) {
+      print("""
 ===============================
 ❌ Invalid Selection!
 Please enter 1, 2, or 3.
 ===============================
 """);
-  }
-  switch (choice) {
-    case 1:
-      {
-        login();
-        check2();
-      }
-    case 2:
-      {
-        register();
-        break;
-      }
-    case 3:
-      {
-        print("Goodbye!");
-        exit(0);
-      }
+
+      continue; //  عشان يرجع يطلب من جديد
+    }
+    switch (choice) {
+      case 1:
+        {
+          bool success = login();
+          if (success) {
+            displayMenu2();
+            check2();
+          }
+          break;
+        }
+      case 2:
+        {
+          register();
+          break;
+        }
+      case 3:
+        {
+          print("Goodbye!");
+          exit(0);
+        }
+    }
   }
 }
 
@@ -106,7 +114,8 @@ Please enter 1, 2, or 3.
 }
 
 void buyPhone() {
-  while (true) {
+  bool shopping = true;
+  while (shopping) {
     printPhones();
 
     stdout.write(
@@ -123,16 +132,16 @@ void buyPhone() {
       } else if (number > 0 && number <= phones.length) {
         var selectPhone = phones[number - 1];
 
-//         var currentUser = users[0];
-//         if (selectPhone.price > currentUser.budget.balance) {
-//           print("""
-// ===============================
-// ❌ Your budget is not enough!
-// 💰 Your Budget : \$${currentUser.budget}
-// 💲 Phone Price : \$${selectPhone.price}
-// ===============================
-// """);
-//         }
+        //         var currentUser = users[0];
+        //         if (selectPhone.price > currentUser.budget.balance) {
+        //           print("""
+        // ===============================
+        // ❌ Your budget is not enough!
+        // 💰 Your Budget : \$${currentUser.budget}
+        // 💲 Phone Price : \$${selectPhone.price}
+        // ===============================
+        // """);
+        //         }
 
         stdout.write(
           "Are you sure you want to buy ${selectPhone.brand} for \$${selectPhone.price}? (y/n): ",
@@ -150,7 +159,18 @@ void buyPhone() {
 ==========================================
 Thank you for your purchase!
 """);
-          exit(0);
+
+          stdout.write(
+            "Do you want to continue shopping or repair another item? (y = Yes, return to menu / n = No, exit program): (y/n): ",
+          );
+          String? again = stdin.readLineSync()?.toLowerCase();
+          print("");
+          if (again == 'y') {
+            displayMenu2();
+            shopping = false;
+          } else {
+            exit(0);
+          }
         }
       } else {
         print("❌ Invalid selection.");
